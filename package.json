@@ -1,0 +1,27 @@
+{
+  "name": "ri-ri-dnd",
+  "version": "1.0.0",
+  "description": "discord bot for dnd 5e",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rileytoddherman/ri-ri-dnd.git"
+  },
+  "keywords": [
+    "dnd",
+    "5e"
+  ],
+  "author": "rileytoddherman",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/rileytoddherman/ri-ri-dnd/issues"
+  },
+  "homepage": "https://github.com/rileytoddherman/ri-ri-dnd#readme"
+}
