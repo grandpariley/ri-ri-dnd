@@ -4,7 +4,8 @@
   "description": "discord bot for dnd 5e",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^12.1.1"
+    "discord.js": "^12.1.1",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {},
   "scripts": {
