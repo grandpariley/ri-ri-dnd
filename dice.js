@@ -28,7 +28,7 @@ class Dice {
 
     rollManyAndSum(numberOfDice) {
         let sum = 0;
-        for (; numberOfDice - 1 > 0; numberOfDice--) {
+        for (; numberOfDice > 0; numberOfDice--) {
             sum += this.roll;
         }
         return sum;

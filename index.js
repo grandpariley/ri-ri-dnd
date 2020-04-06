@@ -22,7 +22,7 @@ client.on('message', msg => {
     if (messageUtils.isDiceRoll()) {
         dice.sides = messageUtils.getDiceSidesFromDiceMessage();
         let diceResult = dice.rollManyAndSum(messageUtils.getDiceAmountFromDiceMessage())
-            + messageUtils.getDiceModifierFromDiceMessage();
+            + messageUtils.getModifierFromDiceMessage();
         msg.reply(diceResult);
         return;
     }
