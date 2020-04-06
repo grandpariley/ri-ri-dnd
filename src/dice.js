@@ -51,6 +51,7 @@ class Dice {
     }
 
     rollAllAndSum() {
+        //TODO RH this is gross
         if (this.advantage !== 0) {
             let result = [];
             for (let i = 0; i < this.amount + Math.abs(this.advantage); i++) {
