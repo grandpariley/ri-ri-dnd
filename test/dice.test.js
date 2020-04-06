@@ -39,6 +39,7 @@ describe('test dice', () => {
     describe('test roll', () => {
         it('should be between 1 and 7 inclusive', () => {
             dice.sides = SEVEN;
+            dice.amount = ONE;
             let roll = dice.roll;
             assert(roll >= ONE);
             assert(roll <= SEVEN);
@@ -51,21 +52,18 @@ describe('test dice', () => {
         });
     });
 
-    describe('test rollManyAndSum', () => {
+    describe('test rollAllAndSum', () => {
         it('should roll several dice and return the sum', () => {
             dice.sides = SEVEN;
-            let sum = dice.rollManyAndSum(FIVE);
+            dice.amount = FIVE;
+            let sum = dice.rollAllAndSum();
             assert(sum > FIVE);
             assert(sum <= FIVE * SEVEN);
         });
 
         it('should return 0 for zero', () => {
-            let sum = dice.rollManyAndSum(ZERO);
-            assert(sum === ZERO);
-        });
-
-        it('should return 0 for negative numbers', () => {
-            let sum = dice.rollManyAndSum(NEG_ONE);
+            dice.amount = ZERO;
+            let sum = dice.rollAllAndSum();
             assert(sum === ZERO);
         });
     });

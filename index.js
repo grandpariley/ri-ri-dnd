@@ -1,11 +1,9 @@
 require('dotenv').config();
-const Dice = require('./src/dice.js');
-const MessageUtils = require('./src/messageUtils.js');
+const MessageHandler = require('./src/messageHandler.js');
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-const dice = new Dice();
-const messageUtils = new MessageUtils();
+const messageHandler = new MessageHandler();
 console.log(client)
 
 client.on('ready', () => {
@@ -13,20 +11,8 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    messageUtils.message = msg.content;
-    if (messageUtils.isMarco()) {
-        msg.reply(messageUtils.getPolo());
-        return;
-    }
-
-    if (messageUtils.isDiceRoll()) {
-        dice.sides = messageUtils.getDiceSidesFromDiceMessage();
-        let diceResult = dice.rollManyAndSum(messageUtils.getDiceAmountFromDiceMessage())
-            + messageUtils.getModifierFromDiceMessage();
-        msg.reply(diceResult);
-        return;
-    }
-
+    messageHandler.message = msg.content;
+    msg.reply(messageHandler.reply);
 });
 
 client.login(process.env.TOKEN);

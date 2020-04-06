@@ -5,14 +5,16 @@ class Dice {
 
     reset() {
         this._sides = -1;
+        this._amount = 1;
+        this._advantage = 0;
+    }
+    
+    set roll(_) {
+        throw new Error('cannot set the value of a roll!');
     }
 
     get roll() {
         return Math.floor(Math.random() * this.sides) + 1;
-    }
-
-    set roll(_) {
-        throw new Error('cannot set the value of a roll!');
     }
 
     set sides(sides) {
@@ -26,9 +28,45 @@ class Dice {
         return this._sides;
     }
 
-    rollManyAndSum(numberOfDice) {
+    set amount(amount) {
+        if (isNaN(amount) || amount < 0) {
+            throw new Error('amount cannot be negative or NaN!')
+        }
+        this._amount = amount;
+    }
+
+    get amount() {
+        return this._amount;
+    }
+
+    set advantage(advantageAsInt) {
+        if (isNaN(advantageAsInt) || this.amount !== 1 || ![-1, 0, 1].includes(advantageAsInt)) {
+            throw new Error('advantage can only happen with one die!')
+        }
+        this._advantage = advantageAsInt;
+    }
+
+    get advantage() {
+        return this._advantage;
+    }
+
+    rollAllAndSum() {
+        if (this.advantage !== 0) {
+            let result = [];
+            for (let i = 0; i < this.amount * 2; i++) {
+                result.push(this.roll);
+            }
+            let maxMin = 0;
+            result.forEach(result => {
+                result *= this.advantage;
+                if (result > maxMin) {
+                    maxMin = result;
+                }
+            });
+            return maxMin;
+        }
         let sum = 0;
-        for (; numberOfDice > 0; numberOfDice--) {
+        for (let i = 0; i < this.amount; i++) {
             sum += this.roll;
         }
         return sum;
