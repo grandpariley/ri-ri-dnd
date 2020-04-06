@@ -1,5 +1,4 @@
 const assert = require('assert');
-const sinon = require('sinon');
 const Dice = require('../dice.js');
 
 const dice = new Dice();

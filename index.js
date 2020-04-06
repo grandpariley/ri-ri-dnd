@@ -1,9 +1,9 @@
 require('dotenv').config();
-import { Client } from 'discord.js';
-import { Dice } from './dice'
-import { MessageUtils } from './messageUtils'
+const Dice = require('./dice.js');
+const MessageUtils = require('./messageUtils.js');
+const Discord = require('discord.js');
 
-const client = new Client();
+const client = new Discord.Client();
 const dice = new Dice();
 const messageUtils = new MessageUtils();
 console.log(client)
