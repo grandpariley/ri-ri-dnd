@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Dice = require('../dice.js');
+const Dice = require('../src/dice.js');
 
 const dice = new Dice();
 

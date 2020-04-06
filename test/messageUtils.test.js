@@ -1,5 +1,5 @@
 const assert = require('assert');
-const MessageUtils = require('../messageUtils.js');
+const MessageUtils = require('../src/messageUtils.js');
 
 const messageUtils = new MessageUtils();
 

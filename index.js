@@ -1,6 +1,6 @@
 require('dotenv').config();
-const Dice = require('./dice.js');
-const MessageUtils = require('./messageUtils.js');
+const Dice = require('./src/dice.js');
+const MessageUtils = require('./src/messageUtils.js');
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
