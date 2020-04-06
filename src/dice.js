@@ -53,17 +53,17 @@ class Dice {
     rollAllAndSum() {
         if (this.advantage !== 0) {
             let result = [];
-            for (let i = 0; i < this.amount * 2; i++) {
+            for (let i = 0; i < this.amount + Math.abs(this.advantage); i++) {
                 result.push(this.roll);
             }
-            let maxMin = 0;
+            let maxMin;
             result.forEach(result => {
                 result *= this.advantage;
-                if (result > maxMin) {
+                if (!maxMin || result > maxMin) {
                     maxMin = result;
                 }
             });
-            return maxMin;
+            return Math.abs(maxMin);
         }
         let sum = 0;
         for (let i = 0; i < this.amount; i++) {
