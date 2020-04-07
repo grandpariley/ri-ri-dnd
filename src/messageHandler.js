@@ -1,7 +1,7 @@
 const Dice = require('./dice.js');
 
 const marcoRegEx = /marco/i;
-const diceRegEx = /([0-9]*)d([0-9]+)([+-]{0,1}[0-9]*)/i;
+const diceRegEx = /([0-9]*)d([0-9]+)([+-]?[0-9]*)((adv)|(dadv))?/i;
 const ohNoRegEx = /ohno/i;
 
 class MessageHandler {
