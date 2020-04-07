@@ -1,6 +1,8 @@
 const Dice = require('./dice.js');
-const diceRegex = /([0-9]*)d([0-9]+)([+-]{0,1}[0-9]*)/i;
 
+const marcoRegEx = /marco/i;
+const diceRegEx = /([0-9]*)d([0-9]+)([+-]{0,1}[0-9]*)/i;
+const ohNoRegEx = /ohno/i;
 
 class MessageHandler {
     constructor() {
@@ -38,17 +40,17 @@ class MessageHandler {
         }
 
         if (this.isDiceRoll()) {
-            this.setDiceSidesFromDiceMessage();
-            this.setDiceAmountFromDiceMessage();
-            this.setAdvantageOrDisadvantageFromDiceMessage();
-            return (this.dice.rollAllAndSum()
-                + this.getModifierFromDiceMessage()).toString();
+            return this.getDiceRoll()
+        }
+
+        if (this.isOhNo()) {
+            return this.getOhNoPicture();
         }
     }
 
     // MARCO / POLO SUPPORT
     isMarco() {
-        return /marco/i.exec(this.message);
+        return marcoRegEx.exec(this.message);
     }
 
     getPolo() {
@@ -57,11 +59,19 @@ class MessageHandler {
 
     // DICE SUPPORT
     isDiceRoll() {
-        return !!diceRegex.exec(this.message.replace(/\s/g, ''));
+        return !!diceRegEx.exec(this.message.replace(/\s/g, ''));
+    }
+
+    getDiceRoll() {
+        this.setDiceSidesFromDiceMessage();
+        this.setDiceAmountFromDiceMessage();
+        this.setAdvantageOrDisadvantageFromDiceMessage();
+        return (this.dice.rollAllAndSum()
+            + this.getModifierFromDiceMessage()).toString();
     }
 
     getNumberByIndexInDiceMessage(index) {
-        let parseSides = diceRegex.exec(this.message.replace(/\s/g, ''));
+        let parseSides = diceRegEx.exec(this.message.replace(/\s/g, ''));
         if (!parseSides || parseSides.length < 3 || isNaN(parseSides[index])) {
             throw new Error('invalid dice message');
         }
@@ -91,7 +101,7 @@ class MessageHandler {
     }
 
     setAdvantageOrDisadvantageFromDiceMessage() {
-        let parseSides = diceRegex.exec(this.message.replace(/\s/g, ''));
+        let parseSides = diceRegEx.exec(this.message.replace(/\s/g, ''));
         if (!parseSides || parseSides.length < 4) {
             this.dice.advantage = 0;
         }
@@ -101,6 +111,15 @@ class MessageHandler {
         else if (parseSides[4] === 'dadv') {
             this.dice.advantage = -1;
         }
+    }
+
+    // OH NO
+    isOhNo() {
+        return ohNoRegEx.exec(this.message.replace(/\s/g, ''));
+    }
+
+    getOhNoPicture() {
+        return process.env.OHNO_URI;
     }
 }
 

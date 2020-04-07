@@ -11,8 +11,14 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+    if (msg.author.bot || !msg.guild) {
+        return;
+    }
     messageHandler.message = msg.content;
-    msg.reply(messageHandler.reply);
+    let reply = messageHandler.reply;
+    if (reply) {
+        msg.reply(reply);
+    }
 });
 
 client.login(process.env.TOKEN);

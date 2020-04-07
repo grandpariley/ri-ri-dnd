@@ -47,6 +47,11 @@ describe('test message handler', () => {
             messageHandler.message = 'd1';
             assert(messageHandler.reply === '1');
         });
+
+        it('test oh no should get picture link', () => {
+            messageHandler.message = 'ohno';
+            assert(process.env.OHNO_URI === messageHandler.reply)
+        });
     });
 
     describe('test marco/polo', () => {
@@ -113,11 +118,11 @@ describe('test message handler', () => {
 
         it('should throw error for invalid dice message', () => {
             messageHandler.message = 'not dice';
-            assert.throws(() => { 
-                messageHandler.getModifierFromDiceMessage(); 
+            assert.throws(() => {
+                messageHandler.getModifierFromDiceMessage();
             }, Error);
         });
-        
+
         it('should get sides from message', () => {
             messageHandler.message = '7d3 + 5';
             messageHandler.setDiceSidesFromDiceMessage()
@@ -126,11 +131,11 @@ describe('test message handler', () => {
 
         it('should throw error for invalid dice message', () => {
             messageHandler.message = 'not dice';
-            assert.throws(() => { 
-                messageHandler.getDiceSidesFromDiceMessage(); 
+            assert.throws(() => {
+                messageHandler.getDiceSidesFromDiceMessage();
             }, Error);
         });
-        
+
         it('should get amount from message', () => {
             messageHandler.message = '7d3 + 5';
             messageHandler.setDiceAmountFromDiceMessage()
@@ -139,10 +144,47 @@ describe('test message handler', () => {
 
         it('should throw error for invalid dice message', () => {
             messageHandler.message = 'not dice';
-            assert.throws(() => { 
-                messageHandler.setDiceAmountFromDiceMessage(); 
+            assert.throws(() => {
+                messageHandler.setDiceAmountFromDiceMessage();
             }, Error);
         });
+    });
+
+    describe('test oh no', () => {
+        [
+            {
+                desc: 'should be ohno',
+                message: 'ohno'
+            },
+            {
+                desc: 'should be OhNo',
+                message: 'OhNo'
+            },
+            {
+                desc: 'should be oh no',
+                message: 'oh no'
+            },
+            {
+                desc: 'should be ohno',
+                message: ':O oh no!'
+            },
+        ].forEach(msg => {
+            it(msg.desc, () => {
+                messageHandler.message = msg.message;
+                assert(messageHandler.isOhNo);
+            });
+        });
+
+        it('should not be oh no', () => {
+            messageHandler.message = 'froot loops';
+            assert(!messageHandler.isOhNo());
+        });
+
+        it('should get oh no picture uri', () => {
+            assert(process.env.OHNO_URI === messageHandler.getOhNoPicture())
+        });
+
+
     });
 });
 
