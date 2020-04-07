@@ -8,7 +8,7 @@ class Dice {
         this._amount = 1;
         this._advantage = 0;
     }
-    
+
     set roll(_) {
         throw new Error('cannot set the value of a roll!');
     }
@@ -19,7 +19,7 @@ class Dice {
 
     set sides(sides) {
         if (isNaN(sides) || sides < 0) {
-            throw new Error('sides cannot be negative or NaN!')
+            throw new Error('sides cannot be negative or NaN!');
         }
         this._sides = sides;
     }
@@ -29,8 +29,8 @@ class Dice {
     }
 
     set amount(amount) {
-        if (isNaN(amount) || amount < 0) {
-            throw new Error('amount cannot be negative or NaN!')
+        if (isNaN(amount) || amount <= 0) {
+            throw new Error('amount cannot be zero, negative or NaN!');
         }
         this._amount = amount;
     }
@@ -40,10 +40,10 @@ class Dice {
     }
 
     set advantage(advantageAsInt) {
-        if (isNaN(advantageAsInt) || this.amount !== 1 || ![-1, 0, 1].includes(advantageAsInt)) {
-            throw new Error('advantage can only happen with one die!')
+        if (isNaN(advantageAsInt)) {
+            throw new Error('advantage must be a number!');
         }
-        this._advantage = advantageAsInt;
+        this._advantage = Math.floor(advantageAsInt);
     }
 
     get advantage() {
@@ -51,26 +51,13 @@ class Dice {
     }
 
     rollAllAndSum() {
-        //TODO RH this is gross
-        if (this.advantage !== 0) {
-            let result = [];
-            for (let i = 0; i < this.amount + Math.abs(this.advantage); i++) {
-                result.push(this.roll);
-            }
-            let maxMin;
-            result.forEach(result => {
-                result *= this.advantage;
-                if (!maxMin || result > maxMin) {
-                    maxMin = result;
-                }
-            });
-            return Math.abs(maxMin);
-        }
-        let sum = 0;
-        for (let i = 0; i < this.amount; i++) {
-            sum += this.roll;
-        }
-        return sum;
+        return Math.abs(
+            Array.from({ length: this.amount + Math.abs(this.advantage) }, () => this.roll)
+                .map(result => this.advantage < 0 ? result *= -1 : result)
+                .sort((a, b) => b - a)
+                .slice(0, this.amount)
+                .reduce((sum, maxMin) => sum + maxMin)
+        );
     }
 }
 

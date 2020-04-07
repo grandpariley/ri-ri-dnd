@@ -49,20 +49,6 @@ describe('test dice', () => {
                 dice.advantage = 'mini wheats';
             }, Error);
         });
-
-        it('should blow up for amount not 1', () => {
-            assert.throws(() => {
-                dice.amount = SEVEN;
-                dice.advantage = ONE;
-            }, Error);
-        });
-
-        it('should blow up for advantage not valid', () => {
-            assert.throws(() => {
-                dice.amount = ONE;
-                dice.advantage = SEVEN;
-            }, Error);
-        });
     });
 
     describe('test roll', () => {
@@ -91,14 +77,7 @@ describe('test dice', () => {
             assert(sum <= FIVE * SEVEN);
         });
 
-        it('should return 0 for zero', () => {
-            dice.reset();
-            dice.amount = ZERO;
-            let sum = dice.rollAllAndSum();
-            assert(sum === ZERO);
-        });
-
-        it('should be valid advantage', () => {
+        it('should be valid advantage (1)', () => {
             dice.amount = ONE;
             dice.sides = SEVEN;
             dice.advantage = ONE;
@@ -107,10 +86,27 @@ describe('test dice', () => {
             assert(result <= SEVEN);
         });
 
-        it('should be valid disadvantage', () => {
+        it('should be valid disadvantage (1)', () => {
             dice.amount = ONE;
             dice.sides = SEVEN;
             dice.advantage = NEG_ONE;
+            let result = dice.rollAllAndSum();
+            assert(result >= ONE);
+            assert(result <= SEVEN);
+        });
+        it('should be valid advantage (n)', () => {
+            dice.amount = ONE;
+            dice.sides = SEVEN;
+            dice.advantage = SEVEN;
+            let result = dice.rollAllAndSum();
+            assert(result >= ONE);
+            assert(result <= SEVEN);
+        });
+
+        it('should be valid disadvantage (n)', () => {
+            dice.amount = ONE;
+            dice.sides = SEVEN;
+            dice.advantage = NEG_ONE*SEVEN;
             let result = dice.rollAllAndSum();
             assert(result >= ONE);
             assert(result <= SEVEN);
