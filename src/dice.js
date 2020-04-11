@@ -50,14 +50,12 @@ class Dice {
         return this._advantage;
     }
 
-    rollAllAndSum() {
-        return Math.abs(
-            Array.from({ length: this.amount + Math.abs(this.advantage) }, () => this.roll)
+    rollAll() {
+        return Array.from({ length: this.amount + Math.abs(this.advantage) }, () => this.roll)
                 .map(result => this.advantage < 0 ? result *= -1 : result)
                 .sort((a, b) => b - a)
                 .slice(0, this.amount)
-                .reduce((sum, maxMin) => sum + maxMin)
-        );
+                .map(result => Math.abs(result));
     }
 }
 

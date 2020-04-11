@@ -16,8 +16,10 @@ class DiceHandler {
         this.setDiceSidesFromDiceMessage();
         this.setDiceAmountFromDiceMessage();
         this.setAdvantageOrDisadvantageFromDiceMessage();
-        return (this.dice.rollAllAndSum()
+        let sum = (this.dice.rollAll()
+            .reduce((sum, die) => sum + die)
             + this.getModifierFromDiceMessage()).toString();
+        return sum;
     }
 
     getNumberByIndexInDiceMessage(index) {

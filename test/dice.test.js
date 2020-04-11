@@ -6,7 +6,6 @@ const dice = new Dice();
 const SEVEN = 7;
 const FIVE = 5;
 const ONE = 1;
-const ZERO = 0;
 const NEG_ONE = -1;
 
 describe('test dice', () => {
@@ -67,12 +66,12 @@ describe('test dice', () => {
         });
     });
 
-    describe('test rollAllAndSum', () => {
+    describe('test rollAll', () => {
         it('should roll several dice and return the sum', () => {
             dice.reset();
             dice.sides = SEVEN;
             dice.amount = FIVE;
-            let sum = dice.rollAllAndSum();
+            let sum = dice.rollAll().reduce((sum, die) => sum + die);
             assert(sum > FIVE);
             assert(sum <= FIVE * SEVEN);
         });
@@ -81,7 +80,7 @@ describe('test dice', () => {
             dice.amount = ONE;
             dice.sides = SEVEN;
             dice.advantage = ONE;
-            let result = dice.rollAllAndSum();
+            let result = dice.rollAll().reduce((sum, die) => sum + die);
             assert(result >= ONE);
             assert(result <= SEVEN);
         });
@@ -90,7 +89,7 @@ describe('test dice', () => {
             dice.amount = ONE;
             dice.sides = SEVEN;
             dice.advantage = NEG_ONE;
-            let result = dice.rollAllAndSum();
+            let result = dice.rollAll().reduce((sum, die) => sum + die);
             assert(result >= ONE);
             assert(result <= SEVEN);
         });
@@ -98,7 +97,7 @@ describe('test dice', () => {
             dice.amount = ONE;
             dice.sides = SEVEN;
             dice.advantage = SEVEN;
-            let result = dice.rollAllAndSum();
+            let result = dice.rollAll().reduce((sum, die) => sum + die);
             assert(result >= ONE);
             assert(result <= SEVEN);
         });
@@ -107,7 +106,7 @@ describe('test dice', () => {
             dice.amount = ONE;
             dice.sides = SEVEN;
             dice.advantage = NEG_ONE*SEVEN;
-            let result = dice.rollAllAndSum();
+            let result = dice.rollAll().reduce((sum, die) => sum + die);
             assert(result >= ONE);
             assert(result <= SEVEN);
         });
