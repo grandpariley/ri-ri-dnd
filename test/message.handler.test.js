@@ -21,29 +21,37 @@ describe('test message handler', () => {
     });
 
     describe('test reply (end to end tests)', () => {
-        it('test marco/polo', () => {
-            let messageHandler = new MessageHandler('marco');
-            assert(messageHandler.reply === 'polo!');
-        });
-
-        it('test dice', () => {
-            let messageHandler = new MessageHandler('3d1 + 3');
-            assert(messageHandler.reply === 'results: 1,1,1\ntotal: 6');
-        });
-
-        it('test dice no modifier should be 0', () => {
-            let messageHandler = new MessageHandler('3d1');
-            assert(messageHandler.reply === 'results: 1,1,1\ntotal: 3');
-        });
-
-        it('test dice no amount should be 1', () => {
-            let messageHandler = new MessageHandler('d1');
-            assert(messageHandler.reply === 'results: 1\ntotal: 1');
-        });
-
-        it('test oh no should get picture link', () => {
-            let messageHandler = new MessageHandler('ohno');
-            assert(process.env.OHNO_URI === messageHandler.reply)
+        [
+            {
+                msg: 'marco',
+                exp: 'polo!',
+                desc: 'test marco/polo'
+            },
+            {
+                msg: '3d1 + 3',
+                exp: '\nresults: 1,1,1\ntotal: 6',
+                desc: 'test dice'
+            },
+            {
+                msg: '3d1',
+                exp: '\nresults: 1,1,1\ntotal: 3',
+                desc: 'test dice no modifier should be 0'
+            },
+            {
+                msg: 'd1',
+                exp: '\nresults: 1\ntotal: 1',
+                desc: 'test dice no amount should be 1'
+            },
+            {
+                msg: 'ohno',
+                exp: process.env.OHNO_URI,
+                desc: 'test oh no should get picture link'
+            },
+        ].forEach(testCase => {
+            it(testCase.desc, () => {
+                let messageHandler = new MessageHandler(testCase.msg);
+                assert(messageHandler.reply === testCase.exp);
+            });
         });
     });
 });
