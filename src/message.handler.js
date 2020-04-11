@@ -6,6 +6,7 @@ class MessageHandler {
     constructor(message) {
         this.message = message;
         this.handlers = [
+            //ADD NEW HANDLERS HERE
             new OhNoHandler(message),
             new MarcoPoloHandler(message),
             new DiceHandler(message)
@@ -46,7 +47,6 @@ class MessageHandler {
         throw new Error('cannot set reply!');
     }
 
-    // HANDLERS
     get reply() {
         for (const handler of this.handlers) {
             if (handler.is()) {
