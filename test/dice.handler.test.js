@@ -2,7 +2,7 @@ const assert = require('assert');
 const DiceHandler = require('../src/dice.handler.js');
 
 
-describe('test dice', () => {
+describe('test dice handler', () => {
     [
         {
             desc: 'should be dice roll with modifier',
@@ -27,13 +27,13 @@ describe('test dice', () => {
     ].forEach(testCase => {
         it(testCase.desc, () => {
             let diceHandler = new DiceHandler(testCase.message);
-            assert(diceHandler.isDiceRoll());
+            assert(diceHandler.is());
         });
     });
 
     it('should not be a dice roll', () => {
         let diceHandler = new DiceHandler('marco');
-        assert(!diceHandler.isDiceRoll());
+        assert(!diceHandler.is());
     });
 
     it('should get modifier from message', () => {

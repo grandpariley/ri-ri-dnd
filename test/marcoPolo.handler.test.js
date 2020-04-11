@@ -14,17 +14,17 @@ describe('test marco/polo', () => {
     ].forEach(testCase => {
         it('should be marco', () => {
             let marcoPoloHandler = new MarcoPoloHandler(testCase.msg);
-            assert(marcoPoloHandler.isMarco());
+            assert(marcoPoloHandler.is());
         });
     });
 
     it('should not be marco', () => {
         let marcoPoloHandler = new MarcoPoloHandler('not marko');
-        assert(!marcoPoloHandler.isMarco());
+        assert(!marcoPoloHandler.is());
     });
 
     it('should be polo', () => {
         let marcoPoloHandler = new MarcoPoloHandler('');
-        assert(marcoPoloHandler.getPolo() === 'polo!');
+        assert(marcoPoloHandler.reply() === 'polo!');
     });
 });

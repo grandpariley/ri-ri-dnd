@@ -8,11 +8,11 @@ class DiceHandler {
         this.dice = new Dice();
     }
 
-    isDiceRoll() {
+    is() {
         return !!diceRegEx.exec(this.message.replace(/\s/g, ''));
     }
 
-    getDiceRoll() {
+    reply() {
         this.setDiceSidesFromDiceMessage();
         this.setDiceAmountFromDiceMessage();
         this.setAdvantageOrDisadvantageFromDiceMessage();

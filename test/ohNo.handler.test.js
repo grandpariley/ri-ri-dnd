@@ -22,17 +22,17 @@ describe('test oh no', () => {
     ].forEach(msg => {
         it(msg.desc, () => {
             let ohNoHandler = new OhNoHandler(msg.message);
-            assert(ohNoHandler.isOhNo());
+            assert(ohNoHandler.is());
         });
     });
 
     it('should not be oh no', () => {
         let ohNoHandler = new OhNoHandler('froot loops');
-        assert(!ohNoHandler.isOhNo());
+        assert(!ohNoHandler.is());
     });
 
     it('should get oh no picture uri', () => {
         let ohNoHandler = new OhNoHandler('');
-        assert(process.env.OHNO_URI === ohNoHandler.getOhNo());
+        assert(process.env.OHNO_URI === ohNoHandler.reply());
     });
 });

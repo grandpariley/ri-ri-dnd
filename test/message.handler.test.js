@@ -45,7 +45,6 @@ describe('test message handler', () => {
             let messageHandler = new MessageHandler('ohno');
             assert(process.env.OHNO_URI === messageHandler.reply)
         });
-        const messageHandler = new MessageHandler('');
     });
 });
 

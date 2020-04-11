@@ -5,11 +5,11 @@ class MarcoPoloHandler {
         this.message = message;
     }
 
-    isMarco() {
+    is() {
         return marcoRegEx.exec(this.message);
     }
 
-    getPolo() {
+    reply() {
         return 'polo!'
     }
 }

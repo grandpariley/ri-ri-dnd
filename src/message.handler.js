@@ -5,14 +5,16 @@ const DiceHandler = require('./dice.handler.js');
 class MessageHandler {
     constructor(message) {
         this.message = message;
-        this.ohNoHandler = new OhNoHandler(message);
-        this.marcoPoloHandler = new MarcoPoloHandler(message);
-        this.diceHandler = new DiceHandler(message);
+        this.handlers = [
+            new OhNoHandler(message),
+            new MarcoPoloHandler(message),
+            new DiceHandler(message)
+        ];
     }
 
     set message(message) {
         if (typeof message !== 'string' && typeof message !== 'number') {
-            throw new Error('message must be a string!')
+            throw new Error('message must be a string!');
         }
         this._message = message.toString();
     }
@@ -21,23 +23,37 @@ class MessageHandler {
         return this._message;
     }
 
+    get handlers() {
+        if (!Array.isArray(this._handlers)) {
+            this._handlers = [];
+        }
+        return this._handlers;
+    }
+
+    set handlers(handlers) {
+        if (!Array.isArray(handlers)) {
+            throw new Error('handlers must be an array!');
+        }
+        handlers.forEach(handler => {
+            if (typeof handler.is !== 'function' || typeof handler.reply !== 'function') {
+                throw new Error('handlers must be handlers!');
+            }
+        });
+        this._handlers = handlers;
+    }
+
     set reply(_) {
         throw new Error('cannot set reply!');
     }
 
     // HANDLERS
     get reply() {
-        if (this.marcoPoloHandler.isMarco()) {
-            return this.marcoPoloHandler.getPolo();
+        for (const handler of this.handlers) {
+            if (handler.is()) {
+                return handler.reply();
+            }
         }
-
-        if (this.diceHandler.isDiceRoll()) {
-            return this.diceHandler.getDiceRoll();
-        }
-
-        if (this.ohNoHandler.isOhNo()) {
-            return this.ohNoHandler.getOhNo();
-        }
+        return undefined;
     }
 }
 

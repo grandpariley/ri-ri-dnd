@@ -5,11 +5,11 @@ class OhNoHandler {
         this.message = message;
     }
 
-    isOhNo() {
+    is() {
         return ohNoRegEx.exec(this.message.replace(/\s/g, ''));
     }
 
-    getOhNo() {
+    reply() {
         return process.env.OHNO_URI;
     }
 }

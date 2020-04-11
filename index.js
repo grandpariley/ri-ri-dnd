@@ -1,5 +1,5 @@
 require('dotenv').config();
-const MessageHandler = require('./src/messageHandler.js');
+const MessageHandler = require('./src/message.handler.js');
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
