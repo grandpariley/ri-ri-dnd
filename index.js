@@ -3,7 +3,6 @@ const MessageHandler = require('./src/messageHandler.js');
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-const messageHandler = new MessageHandler();
 console.log(client)
 
 client.on('ready', () => {
@@ -14,7 +13,7 @@ client.on('message', msg => {
     if (msg.author.bot || !msg.guild) {
         return;
     }
-    messageHandler.message = msg.content;
+    let messageHandler = new MessageHandler(msg.content);
     let reply = messageHandler.reply;
     if (reply) {
         msg.reply(reply);

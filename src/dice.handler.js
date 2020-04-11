@@ -1,63 +1,13 @@
-const Dice = require('./dice.js');
+const Dice = require('./dice.js')
 
-const marcoRegEx = /marco/i;
 const diceRegEx = /([0-9]*)d([0-9]+)([+-]?[0-9]*)((adv)|(dadv))?/i;
-const ohNoRegEx = /ohno/i;
 
-class MessageHandler {
-    constructor() {
-        this._message = '';
-        this._dice = new Dice()
+class DiceHandler {
+    constructor(message) {
+        this.message = message;
+        this.dice = new Dice();
     }
 
-    set message(message) {
-        if (typeof message !== 'string' && typeof message !== 'number') {
-            throw new Error('message must be a string!')
-        }
-        this._message = message.toString();
-    }
-
-    get message() {
-        return this._message;
-    }
-
-    set dice(_) {
-        throw new Error('cannot set dice!');
-    }
-
-    get dice() {
-        return this._dice;
-    }
-
-    set reply(_) {
-        throw new Error('cannot set reply!');
-    }
-
-    // HANDLER
-    get reply() {
-        if (this.isMarco()) {
-            return this.getPolo();
-        }
-
-        if (this.isDiceRoll()) {
-            return this.getDiceRoll()
-        }
-
-        if (this.isOhNo()) {
-            return this.getOhNoPicture();
-        }
-    }
-
-    // MARCO / POLO SUPPORT
-    isMarco() {
-        return marcoRegEx.exec(this.message);
-    }
-
-    getPolo() {
-        return 'polo!'
-    }
-
-    // DICE SUPPORT
     isDiceRoll() {
         return !!diceRegEx.exec(this.message.replace(/\s/g, ''));
     }
@@ -112,15 +62,6 @@ class MessageHandler {
             this.dice.advantage = -1;
         }
     }
-
-    // OH NO
-    isOhNo() {
-        return ohNoRegEx.exec(this.message.replace(/\s/g, ''));
-    }
-
-    getOhNoPicture() {
-        return process.env.OHNO_URI;
-    }
 }
 
-module.exports = MessageHandler;
+module.exports = DiceHandler;
