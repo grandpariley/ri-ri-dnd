@@ -28,17 +28,17 @@ describe('test message handler', () => {
 
         it('test dice', () => {
             let messageHandler = new MessageHandler('3d1 + 3');
-            assert(messageHandler.reply === '6');
+            assert(messageHandler.reply === 'results: 1,1,1\ntotal: 6');
         });
 
         it('test dice no modifier should be 0', () => {
             let messageHandler = new MessageHandler('3d1');
-            assert(messageHandler.reply === '3');
+            assert(messageHandler.reply === 'results: 1,1,1\ntotal: 3');
         });
 
         it('test dice no amount should be 1', () => {
             let messageHandler = new MessageHandler('d1');
-            assert(messageHandler.reply === '1');
+            assert(messageHandler.reply === 'results: 1\ntotal: 1');
         });
 
         it('test oh no should get picture link', () => {
