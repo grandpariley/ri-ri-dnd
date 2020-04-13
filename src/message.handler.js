@@ -1,6 +1,7 @@
 const OhNoHandler = require('./ohNo.handler.js');
 const MarcoPoloHandler = require('./marcoPolo.handler.js');
 const DiceHandler = require('./dice.handler.js');
+const YikesHandler = require('./yikes.handler.js');
 
 class MessageHandler {
     constructor(message) {
@@ -9,7 +10,8 @@ class MessageHandler {
             //ADD NEW HANDLERS HERE
             new OhNoHandler(message),
             new MarcoPoloHandler(message),
-            new DiceHandler(message)
+            new DiceHandler(message),
+            new YikesHandler(message)
         ];
     }
 
