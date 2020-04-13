@@ -6,7 +6,7 @@ class OhNoHandler {
     }
 
     is() {
-        return ohNoRegEx.exec(this.message.replace(/\s/g, ''));
+        return !!ohNoRegEx.exec(this.message.replace(/\s/g, ''));
     }
 
     reply() {

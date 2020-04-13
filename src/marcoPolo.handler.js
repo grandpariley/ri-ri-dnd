@@ -6,7 +6,7 @@ class MarcoPoloHandler {
     }
 
     is() {
-        return marcoRegEx.exec(this.message);
+        return !!marcoRegEx.exec(this.message);
     }
 
     reply() {
