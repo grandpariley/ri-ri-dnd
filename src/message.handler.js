@@ -4,6 +4,7 @@ const DiceHandler = require('./dice.handler.js');
 const YikesHandler = require('./yikes.handler.js');
 const VroomHandler = require('./vroom.handler.js');
 const SeriousHandler = require('./serious.handler.js');
+const HopeHandler = require('./hope.handler.js');
 
 class MessageHandler {
     constructor(message) {
@@ -15,7 +16,8 @@ class MessageHandler {
             new DiceHandler(message),
             new YikesHandler(message),
             new VroomHandler(message),
-            new SeriousHandler(message)
+            new SeriousHandler(message),
+            new HopeHandler(message)
         ];
     }
 

@@ -47,6 +47,34 @@ describe('test message handler', () => {
                 exp: process.env.OHNO_URI,
                 desc: 'test oh no should get picture link'
             },
+            {
+                msg: 'vroom',
+                exp: 'ALL HAIL THE COOLEST GUY ON DISCORD',
+                desc: 'test vroom should get message'
+            },
+            {
+                msg: 'serious',
+                exp: '~ s e r i o u s l y ADAM!',
+                desc: 'test serious should get message'
+            },
+            {
+                msg: 'hope',
+                exp: '\n“Hope” is the thing with feathers -\n' +
+                'That perches in the soul -\n' +
+                'And sings the tune without the words -\n' +
+                'And never stops - at all -\n' +
+                
+                'And sweetest - in the Gale - is heard -\n' +
+                'And sore must be the storm -\n' +
+                'That could abash the little Bird\n' +
+                'That kept so many warm -\n' +
+                
+                'I’ve heard it in the chillest land -\n' +
+                'And on the strangest Sea -\n' +
+                'Yet - never - in Extremity,\n' +
+                'It asked a crumb - of me.',
+                desc: 'test hope should get poem'
+            },
         ].forEach(testCase => {
             it(testCase.desc, () => {
                 let messageHandler = new MessageHandler(testCase.msg);
