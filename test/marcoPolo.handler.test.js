@@ -12,7 +12,7 @@ describe('test marco/polo', () => {
             desc: 'should be marco case insensitive'
         }
     ].forEach(testCase => {
-        it('should be marco', () => {
+        it(testCase.desc, () => {
             let marcoPoloHandler = new MarcoPoloHandler(testCase.msg);
             assert(marcoPoloHandler.is());
         });
