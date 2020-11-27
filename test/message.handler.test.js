@@ -1,5 +1,6 @@
 const assert = require('assert');
 const MessageHandler = require('../src/message.handler.js');
+const CovidHandler = require('../src/covid.handler.js')
 
 describe('test message handler', () => {
     describe('test basic crud', () => {
@@ -81,6 +82,10 @@ describe('test message handler', () => {
                 assert(messageHandler.reply === testCase.exp);
             });
         });
+        it('test covid', () => {
+            let messageHandler = new MessageHandler('covid');
+            assert(new CovidHandler('').replyOptions.includes(messageHandler.reply) >= 0);
+        })
     });
 });
 
