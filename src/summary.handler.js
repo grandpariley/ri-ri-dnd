@@ -22,7 +22,7 @@ class SummaryHandler {
         if (ddgResponse.AbstractText) {
             return ddgResponse.AbstractText;
         } 
-        if (ddgResponse.RelatedTopics && ddgResponse.RelatedTopics > 0) {
+        if (ddgResponse.RelatedTopics && ddgResponse.RelatedTopics.length > 0) {
             let newSeedArray = ddgResponse.RelatedTopics[0].FirstURL.split("/");
             console.log(newSeedArray[newSeedArray.length - 1])
             return this.getRandomSummaryHelper(newSeedArray[newSeedArray.length - 1])
