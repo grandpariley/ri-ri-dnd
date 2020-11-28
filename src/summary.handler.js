@@ -19,9 +19,13 @@ class SummaryHandler {
         xhr.send();
         let ddgResponse = JSON.parse(xhr.responseText);
         console.log(ddgResponse)
-        if (ddgResponse.Abstract) {
-            return ddgResponse.Abstract;
+        if (ddgResponse.AbstractText) {
+            return ddgResponse.AbstractText;
         } 
+        if (ddgResponse.RelatedTopics && ddgResponse.RelatedTopics > 0) {
+            let newSeedArray = ddgResponse.RelatedTopics[0].FirstURL.split("/");
+            return this.getRandomSummaryHelper(newSeedArray[newSeedArray.length - 1])
+        }
         return undefined;
     }
 
