@@ -17,6 +17,7 @@ class SummaryHandler {
         xhr.open('GET', 'https://api.duckduckgo.com/?format=json&pretty=1&q=' + seed, false);
         xhr.send();
         let ddgResponse = JSON.parse(xhr.responseText);
+        console.log(ddgResponse)
         if (ddgResponse.Abstract) {
             return ddgResponse.Abstract;
         } 
