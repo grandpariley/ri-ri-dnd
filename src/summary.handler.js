@@ -29,8 +29,7 @@ class SummaryHandler {
     }
 
     is() {
-        // return Math.random() < 0.2 && this.isAndSetSummary();
-        return this.isAndSetSummary()
+        return Math.random() < 0.2 && this.isAndSetSummary();
     }
 
     reply() {

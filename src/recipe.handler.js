@@ -47,8 +47,7 @@ class RecipeHandler {
     }  
 
     is() {
-        // return Math.random() < 0.2 && this.isAndSetChitChat();
-        return this.isAndSetRecipe()
+        return Math.random() < 0.2 && this.isAndSetRecipe();
     }
 
     reply() {
