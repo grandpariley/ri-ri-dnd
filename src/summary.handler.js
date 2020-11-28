@@ -13,6 +13,7 @@ class SummaryHandler {
     }
 
     getRandomSummaryHelper(seed) {
+        console.log(seed)
         let xhr = new XMLHttpRequest();
         xhr.open('GET', 'https://api.duckduckgo.com/?format=json&pretty=1&q=' + seed, false);
         xhr.send();

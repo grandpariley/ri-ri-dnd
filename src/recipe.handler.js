@@ -19,7 +19,6 @@ class RecipeHandler {
         xhr.open('GET', 'https://api.spoonacular.com/food/ingredients/search?query=' + seed + '&apiKey=' + process.env.SPOONACULAR, false);
         xhr.send();
         let spoonacularResponse = JSON.parse(xhr.responseText);
-        console.log(spoonacularResponse)
         if (spoonacularResponse && spoonacularResponse.results.length > 0) {
             return this.parseSpoonacular(spoonacularResponse.results);
         }
