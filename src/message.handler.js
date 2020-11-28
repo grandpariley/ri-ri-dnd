@@ -6,6 +6,8 @@ const VroomHandler = require('./vroom.handler.js');
 const SeriousHandler = require('./serious.handler.js');
 const HopeHandler = require('./hope.handler.js');
 const CovidHandler = require('./covid.handler.js');
+const RecipeHandler = require('./recipe.handler.js');
+const SummaryHandler = require('./summary.handler.js');
 
 class MessageHandler {
     constructor(message) {
@@ -19,7 +21,9 @@ class MessageHandler {
             new VroomHandler(message),
             new SeriousHandler(message),
             new HopeHandler(message),
-            new CovidHandler(message)
+            new CovidHandler(message),
+            new RecipeHandler(message),
+            new SummaryHandler(message)
         ];
     }
 
