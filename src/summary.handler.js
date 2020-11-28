@@ -13,19 +13,17 @@ class SummaryHandler {
     }
 
     getRandomSummaryHelper(seed) {
-        console.log(seed)
         let xhr = new XMLHttpRequest();
         xhr.open('GET', 'https://api.duckduckgo.com/?format=json&pretty=1&q=' + seed, false);
         xhr.send();
         let ddgResponse = JSON.parse(xhr.responseText);
-        console.log(ddgResponse)
         if (ddgResponse.AbstractText) {
             return ddgResponse.AbstractText;
         } 
         if (ddgResponse.RelatedTopics && ddgResponse.RelatedTopics.length > 0) {
             let newSeedArray = ddgResponse.RelatedTopics[0].FirstURL.split("/");
-            console.log(newSeedArray[newSeedArray.length - 1])
-            return this.getRandomSummaryHelper(newSeedArray[newSeedArray.length - 1])
+            let newSeed = newSeedArray[newSeedArray.length - 1].replace('_', ' ')
+            return this.getRandomSummaryHelper(newSeed)
         }
         return undefined;
     }
